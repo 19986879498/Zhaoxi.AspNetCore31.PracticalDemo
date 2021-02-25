@@ -255,7 +255,7 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo
         void Show(int id, string name);
     }
     /// <summary>
-    /// autofac «5.0
+    /// autofac «5.0  AOP
     /// </summary>
     [Intercept(typeof(CustomAutofacAop))]
     public class A : IA
