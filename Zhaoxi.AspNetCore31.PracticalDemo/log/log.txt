@@ -3,3 +3,8 @@
 2021-02-26 08:37:55,981 [1] INFO  Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
 2021-02-26 08:37:55,984 [1] INFO  Microsoft.Hosting.Lifetime - Hosting environment: Development
 2021-02-26 08:37:55,989 [1] INFO  Microsoft.Hosting.Lifetime - Content root path: D:\学习轨迹\ASP.NET练习\Zhaoxi.AspNetCore31.PracticalDemo\Zhaoxi.AspNetCore31.PracticalDemo
+2021-02-26 08:44:16,694 [1] INFO  Microsoft.Hosting.Lifetime - Now listening on: https://localhost:5001
+2021-02-26 08:44:16,711 [1] INFO  Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5000
+2021-02-26 08:44:16,716 [1] INFO  Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2021-02-26 08:44:16,720 [1] INFO  Microsoft.Hosting.Lifetime - Hosting environment: Development
+2021-02-26 08:44:16,723 [1] INFO  Microsoft.Hosting.Lifetime - Content root path: D:\学习轨迹\ASP.NET练习\Zhaoxi.AspNetCore31.PracticalDemo\Zhaoxi.AspNetCore31.PracticalDemo

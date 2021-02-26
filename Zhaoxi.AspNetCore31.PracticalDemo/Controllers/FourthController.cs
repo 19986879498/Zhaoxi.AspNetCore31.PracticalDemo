@@ -17,7 +17,7 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo.Controllers
     /// </summary>
     //[CustomExceptionFilterAttribute()]//控制器注册
 
-    [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
+    [ServiceFilter(typeof(CustomExceptionFilterAttribute))]//当出现异常时处理的aop
     //[TypeFilter(typeof(CustomExceptionFilterAttribute))]
     [CustomFilterFactory(typeof(CustomExceptionFilterAttribute))]
     [CustomControllerFilter]
