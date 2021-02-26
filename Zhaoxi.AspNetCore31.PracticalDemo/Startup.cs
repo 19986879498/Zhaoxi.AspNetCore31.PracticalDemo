@@ -38,14 +38,28 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo
         {
             services.AddSession();//该怎么用session
             services.AddControllersWithViews(
-                options =>
+            #region 全局注册过滤器
+         options =>
                 {
-                    //options.Filters.Add(typeof(CustomExceptionFilterAttribute));//全局注册 全局生效
+                    options.Filters.Add(typeof(CustomExceptionFilterAttribute));//全局注册 全局生效
                     options.Filters.Add(typeof(CustomGlobalFilterAttribute));
-                });
+                    options.Filters.Add(typeof(TestCustomExceptionFilter));
+                    options.Filters.Add(typeof(TestCustomActionFilter));
+                    options.Filters.Add(typeof(TestCustomIResourceFilter));
+                    options.Filters.Add(typeof(TestCustomResultFilter));
+                    // options.Filters.Add(typeof(CustomAuthorizeFilter));
+                }
+                #endregion
+                );
 
             services.AddTransient<CustomExceptionFilterAttribute>();
-
+            #region 注入过滤器
+         //   services.AddTransient<CustomExceptionFilter>();
+            services.AddTransient<TestCustomActionFilter>();
+            services.AddTransient<TestCustomIResourceFilter>();
+            services.AddTransient<TestCustomResultFilter>();
+            //    services.AddTransient<CustomAuthorizeFilter>(); 
+            #endregion
             services.AddTransient<ITestServiceA, TestServiceA>();
             services.AddTransient<ITestServiceB, TestServiceB>();
             services.AddTransient<ITestServiceC, TestServiceC>();
@@ -217,9 +231,9 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo
             var feature = new ControllerFeature();
             manager.PopulateFeature(feature);
             builder.RegisterType<ApplicationPartManager>().AsSelf().SingleInstance();
-            builder.RegisterTypes(feature.Controllers.Select(ti => ti.AsType()).ToArray()).PropertiesAutowired();
+            builder.RegisterTypes(feature.Controllers.Select(ti => ti.AsType()).ToArray()).PropertiesAutowired();//给所有的控制器注入属性
             //containerBuilder.RegisterType<FirstController>().PropertiesAutowired();
-
+            containerBuilder.Register(c => new TestCustomExceptionFilter());
             containerBuilder.Register(c => new CustomAutofacAop());//aop注册
             //containerBuilder.RegisterType<TestServiceA>().As<ITestServiceA>().SingleInstance().PropertiesAutowired();
             //containerBuilder.RegisterType<TestServiceC>().As<ITestServiceC>();
@@ -227,7 +241,7 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo
             containerBuilder.RegisterType<TestServiceD>().As<ITestServiceD>();
             containerBuilder.RegisterType<TestServiceE>().As<ITestServiceE>();
 
-            containerBuilder.RegisterType<A>().As<IA>().EnableInterfaceInterceptors();
+            containerBuilder.RegisterType<A>().As<IA>().EnableInterfaceInterceptors();//给服务A添加aop支持
 
             //containerBuilder.Register<FirstController>();
 

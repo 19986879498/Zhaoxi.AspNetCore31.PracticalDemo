@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Zhaoxi.AspNetCore31.PracticalDemo.Models;
+using Zhaoxi.AspNetCore31.PracticalDemo.Utility.Filter;
 
 namespace Zhaoxi.AspNetCore31.PracticalDemo.Controllers
 {
+    [ServiceFilter(typeof(TestCustomExceptionFilter))]//当出现异常时处理的aop
+    //[TypeFilter(typeof(CustomExceptionFilterAttribute))]
+    [CustomFilterFactory(typeof(TestCustomExceptionFilter))] 
+    [TestCustomActionFilter]
+    [TestCustomIResourceFilter]
+    [TestCustomResultFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,7 +29,6 @@ namespace Zhaoxi.AspNetCore31.PracticalDemo.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             throw new Exception("1234566");
